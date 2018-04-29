@@ -1,0 +1,122 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.hht.myfi.Loan.AddLoanFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <EditText
+        android:id="@+id/etxTheLoaiChoVay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="112dp"
+        android:drawablePadding="20dp"
+        android:drawableStart="@drawable/loai"
+        android:hint="Tên khoản cho vay"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/etxLaiSuatChoVay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayoutThemTienChoVay"
+        android:drawablePadding="20dp"
+        android:drawableStart="@drawable/lai_suat"
+        android:hint="Lãi suất"
+        android:inputType="number"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/etxNgayChoVay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etxLaiSuatChoVay"
+        android:drawablePadding="20dp"
+        android:drawableStart="@drawable/ngay"
+        android:hint="Ngày cho vay"
+        android:inputType="none"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/etxNgayThuLai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etxNgayChoVay"
+        android:drawablePadding="20dp"
+        android:drawableStart="@drawable/ngay"
+        android:hint="Ngày thu lại"
+        android:inputType="none"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/etxGhiChuChoVay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etxNgayThuLai"
+        android:drawablePadding="20dp"
+        android:drawableStart="@drawable/ghi_chu"
+        android:hint="Ghi chú"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="24sp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutThemTienChoVay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/etxTheLoaiChoVay">
+
+        <EditText
+            android:id="@+id/etxSoTienChoVay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="11dp"
+            android:layout_toStartOf="@+id/tvwDonViChoVay"
+            android:drawablePadding="20dp"
+            android:drawableStart="@drawable/tien"
+            android:hint="@string/hintSoTien"
+            android:inputType="number"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvwDonViChoVay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="19dp"
+            android:text="₫"
+            android:textSize="24sp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnThemChoVay"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etxGhiChuChoVay"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Thêm" />
+
+</RelativeLayout>

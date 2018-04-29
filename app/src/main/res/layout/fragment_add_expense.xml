@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.hht.myfi.Expense.AddExpenseFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <Spinner
+        android:id="@+id/spnTheLoaiChi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="112dp" />
+
+    <EditText
+        android:id="@+id/etxNgayChi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayoutThemTienChi"
+        android:drawablePadding="20dp"
+        android:drawableStart="@drawable/ngay"
+        android:hint="Chọn ngày"
+        android:inputType="none"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/etxGhiChuChi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etxNgayChi"
+        android:drawablePadding="20dp"
+        android:drawableStart="@drawable/ghi_chu"
+        android:hint="Ghi chú"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="24sp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutThemTienChi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/spnTheLoaiChi">
+
+        <EditText
+            android:id="@+id/etxSoTienChi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="11dp"
+            android:layout_toStartOf="@+id/tvwDonViChi"
+            android:drawablePadding="20dp"
+            android:drawableStart="@drawable/tien"
+            android:hint="@string/hintSoTien"
+            android:inputType="number"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvwDonViChi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="19dp"
+            android:text="₫"
+            android:textSize="24sp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnThemChi"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etxGhiChuChi"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="96dp"
+        android:text="Thêm" />
+
+</RelativeLayout>

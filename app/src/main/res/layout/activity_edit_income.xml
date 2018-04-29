@@ -1,0 +1,142 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.hht.myfi.Income.EditIncomeActivity">
+
+    <!-- TODO: Update blank fragment layout -->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:id="@+id/appBarLayoutThu">
+        <include
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            layout="@layout/toolbar"
+            />
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutMaKhoanThu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/appBarLayoutThu"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="56dp">
+
+        <TextView
+            android:id="@+id/tvwSuaMaKhoanThuTitle"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="54dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Mã khoản thu: "
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvwSuaMaKhoanThuContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="43dp"
+            android:layout_toEndOf="@+id/tvwSuaMaKhoanThuTitle"
+            android:text="text"
+            android:textSize="24sp" />
+    </RelativeLayout>
+
+    <Spinner
+        android:id="@+id/spnSuaTheLoaiThu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayoutMaKhoanThu" />
+
+    <EditText
+        android:id="@+id/etxSuaNgayThu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayoutSuaTienThu"
+        android:drawablePadding="20dp"
+        android:drawableStart="@drawable/ngay"
+        android:hint="Chọn ngày"
+        android:inputType="none"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/etxSuaGhiChuThu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etxSuaNgayThu"
+        android:drawablePadding="20dp"
+        android:drawableStart="@drawable/ghi_chu"
+        android:hint="Ghi chú"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="24sp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutSuaTienThu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/spnSuaTheLoaiThu">
+
+        <EditText
+            android:id="@+id/etxSuaSoTienThu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="11dp"
+            android:layout_toStartOf="@+id/tvwSuaDonViThu"
+            android:drawablePadding="20dp"
+            android:drawableStart="@drawable/tien"
+            android:hint="@string/hintSoTien"
+            android:inputType="number"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvwSuaDonViThu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="19dp"
+            android:text="₫"
+            android:textSize="24sp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnSuaKhoanThuXoa"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/etxSuaGhiChuThu"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="96dp"
+        android:text="Xoá" />
+
+    <Button
+        android:id="@+id/btnSuaKhoanThuCapNhat"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etxSuaGhiChuThu"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="96dp"
+        android:text="Cập nhật" />
+
+</RelativeLayout>
