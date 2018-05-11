@@ -1,4 +1,5 @@
 package com.hht.myfi;
+import com.hht.myfi.Chart.PieChartActivity;
 import com.hht.myfi.Expense.ExpenseActivity;
 import com.hht.myfi.Loan.LoanActivity;
 import com.hht.myfi.Income.IncomeActivity;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     String[] titles;
     String[] description;
-    int[] imgs = {R.drawable.thu, R.drawable.chi, R.drawable.vay, R.drawable.cho_vay, R.drawable.quan_ly_the_loai};
+    int[] imgs = {R.drawable.thu, R.drawable.chi, R.drawable.vay, R.drawable.cho_vay, R.drawable.quan_ly_the_loai, R.drawable.bieudo};
     Toolbar toolbar;
 
     @Override
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentKhoanVay = new Intent(MainActivity.this, DebtActivity.class);
                 Intent intentKhoanChoVay = new Intent(MainActivity.this, LoanActivity.class);
                 Intent intentQuanLyTheLoaiThuChi = new Intent(MainActivity.this, ManageIncomeExpenseCategoryActivity.class);
+                Intent intentThongKe = new Intent(MainActivity.this, PieChartActivity.class);
 
                 if (((TextView) view.findViewById(R.id.tvwTitle)).getText().toString().equals("Khoản thu"))
                     startActivity(intentKhoanThu);
@@ -62,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intentKhoanChoVay);
                 else if (((TextView) view.findViewById(R.id.tvwTitle)).getText().toString().equals("Quản lý loại thu/chi"))
                     startActivity(intentQuanLyTheLoaiThuChi);
+                else if (((TextView) view.findViewById(R.id.tvwTitle)).getText().toString().equals("Thống kê"))
+                    startActivity(intentThongKe);
             }
         });
     }

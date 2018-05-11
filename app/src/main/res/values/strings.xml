@@ -7,6 +7,7 @@
         <item>Khoản vay</item>
         <item>Khoản cho vay</item>
         <item>Quản lý loại thu/chi</item>
+        <item>Thống kê</item>
     </string-array>
 
     <string-array name="description">
@@ -15,6 +16,7 @@
         <item>Quản lý các khoản vay</item>
         <item>Quản lý các khoản cho vay</item>
         <item>Chỉnh sửa thể loại thu/chi</item>
+        <item>Thống kê thu chi theo tháng, quý, năm</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
