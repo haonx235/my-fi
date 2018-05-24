@@ -18,14 +18,13 @@
         </activity>
         <activity android:name=".Income.IncomeActivity" />
         <activity android:name=".Expense.ExpenseActivity" />
-        <activity android:name=".ChonNhom" />
         <activity android:name=".Income.EditIncomeActivity" />
         <activity android:name=".Expense.EditExpenseActivity" />
         <activity android:name=".Debt.DebtActivity" />
         <activity android:name=".Debt.EditDebtActivity" />
         <activity android:name=".Loan.LoanActivity" />
         <activity android:name=".Loan.EditLoanActivity" />
-        <activity android:name=".ManageIncomeExpenseCategory.ManageIncomeExpenseCategoryActivity"></activity>
+        <activity android:name=".ManageIncomeExpenseCategory.ManageIncomeExpenseCategoryActivity" />
     </application>
 
 </manifest>
