@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.util.Pair;
 
 import com.hht.myfi.DTO.DTO_Expense;
 import com.hht.myfi.DTO.DTO_Income;
@@ -17,66 +18,64 @@ import com.hht.myfi.DTO.DTO_ExpenseCategory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHelper extends SQLiteOpenHelper
-{
+public class DatabaseHelper extends SQLiteOpenHelper {
     private static DatabaseHelper instance = null;
     private Context ctx;
 
-    public static DatabaseHelper getInstance(Context ctx)
-    {
+    public static DatabaseHelper getInstance(Context ctx) {
         if (instance == null)
             instance = new DatabaseHelper(ctx.getApplicationContext());
         return instance;
     }
 
     //region Constant
-    private static final String TAG = "SQLite";
+    public static final String TAG = "SQLite";
 
-    private static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 1;
 
-    private static final String DATABASE_NAME = "DatabaseFinancialManager";
+    public static final String DATABASE_NAME = "DatabaseFinancialManager";
 
-    private static final String TABLE_INCOME = "TableIncome";
-    private static final String COLUMN_INCOME_INCOMEID ="incomeID";
-    private static final String COLUMN_INCOME_INCOMENAME ="incomeName";
-    private static final String COLUMN_INCOME_INCOMEAMOUNT ="incomeAmount";
-    //private static final String COLUMN_INCOME_INCOMECATEGORYID ="incomeCategoryID";
-    private static final String COLUMN_INCOME_INCOMEDATE ="incomeDate";
-    private static final String COLUMN_INCOME_INCOMENOTE ="incomeNote";
+    public static final String TABLE_INCOME = "TableIncome";
+    public static final String COLUMN_INCOME_INCOMEID = "incomeID";
+    public static final String COLUMN_INCOME_INCOMENAME = "incomeName";
+    public static final String COLUMN_INCOME_INCOMEAMOUNT = "incomeAmount";
+    //public static final String COLUMN_INCOME_INCOMECATEGORYID ="incomeCategoryID";
+    public static final String COLUMN_INCOME_INCOMEDATE = "incomeDate";
+    public static final String COLUMN_INCOME_INCOMENOTE = "incomeNote";
 
-    private static final String TABLE_INCOMECATEGORY = "TableIncomeCategory";
-    private static final String COLUMN_INCOMECATEGORY_INCOMECATEGORYID ="incomeCategoryID";
-    private static final String COLUMN_INCOMECATEGORY_INCOMECATEGORYNAME ="incomeCategoryName";
+    public static final String TABLE_INCOMECATEGORY = "TableIncomeCategory";
+    public static final String COLUMN_INCOMECATEGORY_INCOMECATEGORYID = "incomeCategoryID";
+    public static final String COLUMN_INCOMECATEGORY_INCOMECATEGORYNAME = "incomeCategoryName";
 
-    private static final String TABLE_EXPENSE = "TableExpense";
-    private static final String COLUMN_EXPENSE_EXPENSEID ="expenseID";
-    private static final String COLUMN_EXPENSE_EXPENSENAME ="expenseName";
-    private static final String COLUMN_EXPENSE_EXPENSEAMOUNT ="expenseAmount";
-    //private static final String COLUMN_EXPENSE_EXPENSECATEGORYID ="expenseCategoryID";
-    private static final String COLUMN_EXPENSE_EXPENSEDATE ="expenseDate";
-    private static final String COLUMN_EXPENSE_EXPENSENOTE ="expenseNote";
+    public static final String TABLE_EXPENSE = "TableExpense";
+    public static final String COLUMN_EXPENSE_EXPENSEID = "expenseID";
+    public static final String COLUMN_EXPENSE_EXPENSENAME = "expenseName";
+    public static final String COLUMN_EXPENSE_EXPENSEAMOUNT = "expenseAmount";
+    //public static final String COLUMN_EXPENSE_EXPENSECATEGORYID ="expenseCategoryID";
+    public static final String COLUMN_EXPENSE_EXPENSEDATE = "expenseDate";
+    public static final String COLUMN_EXPENSE_EXPENSENOTE = "expenseNote";
 
-    private static final String TABLE_EXPENSECATEGORY = "TableExpenseCategory";
-    private static final String COLUMN_EXPENSECATEGORY_EXPENSECATEGORYID ="expenseCategoryID";
-    private static final String COLUMN_EXPENSECATEGORY_EXPENSECATEGORYNAME ="expenseCategoryName";
+    public static final String TABLE_EXPENSECATEGORY = "TableExpenseCategory";
+    public static final String COLUMN_EXPENSECATEGORY_EXPENSECATEGORYID = "expenseCategoryID";
+    public static final String COLUMN_EXPENSECATEGORY_EXPENSECATEGORYNAME = "expenseCategoryName";
 
-    private static final String TABLE_LOAN = "TableLoan";
-    private static final String COLUMN_LOAN_LOANID ="loanID";
-    private static final String COLUMN_LOAN_LOANNAME ="loanName";
-    private static final String COLUMN_LOAN_LOANAMOUNT ="loanAmount";
-    private static final String COLUMN_LOAN_LOANINTERESTRATE ="loanInterestRate";
-    private static final String COLUMN_LOAN_LOANDATE ="loanDate";
-    private static final String COLUMN_LOAN_LOANEXPIRATIONDATE ="loanExpirationDate";
-    private static final String COLUMN_LOAN_LOANNOTE = "loanNote";
+    public static final String TABLE_LOAN = "TableLoan";
+    public static final String COLUMN_LOAN_LOANID = "loanID";
+    public static final String COLUMN_LOAN_LOANNAME = "loanName";
+    public static final String COLUMN_LOAN_LOANAMOUNT = "loanAmount";
+    public static final String COLUMN_LOAN_LOANINTERESTRATE = "loanInterestRate";
+    public static final String COLUMN_LOAN_LOANDATE = "loanDate";
+    public static final String COLUMN_LOAN_LOANEXPIRATIONDATE = "loanExpirationDate";
+    public static final String COLUMN_LOAN_LOANNOTE = "loanNote";
 
-    private static final String TABLE_DEBT = "TableDebt";
-    private static final String COLUMN_DEBT_DEBTID ="debtID";
-    private static final String COLUMN_DEBT_DEBTNAME ="debtName";
-    private static final String COLUMN_DEBT_DEBTAMOUNT ="debtAmount";
-    private static final String COLUMN_DEBT_DEBTINTERESTRATE ="debtInterestRate";
-    private static final String COLUMN_DEBT_DEBTDATE ="debtDate";
-    private static final String COLUMN_DEBT_DEBTEXPIRATIONDATE ="debtExpirationDate";
-    private static final String COLUMN_DEBT_DEBTNOTE = "debtNote";
+    public static final String TABLE_DEBT = "TableDebt";
+    public static final String COLUMN_DEBT_DEBTID = "debtID";
+    public static final String COLUMN_DEBT_DEBTNAME = "debtName";
+    public static final String COLUMN_DEBT_DEBTAMOUNT = "debtAmount";
+    public static final String COLUMN_DEBT_DEBTINTERESTRATE = "debtInterestRate";
+    public static final String COLUMN_DEBT_DEBTDATE = "debtDate";
+    public static final String COLUMN_DEBT_DEBTEXPIRATIONDATE = "debtExpirationDate";
+    public static final String COLUMN_DEBT_DEBTNOTE = "debtNote";
     //endregion
 
     //Constructor
@@ -167,9 +166,9 @@ public class DatabaseHelper extends SQLiteOpenHelper
     }
 
     //region IncomeCategory
-    public void createDefaultIncomeCategory()  {
+    public void createDefaultIncomeCategory() {
         int count = this.getIncomeCategoryCount();
-        if(count == 0 ) {
+        if (count == 0) {
             DTO_IncomeCategory incomeCategory1 = new DTO_IncomeCategory("Lương");
             DTO_IncomeCategory incomeCategory2 = new DTO_IncomeCategory("Thưởng");
             DTO_IncomeCategory incomeCategory3 = new DTO_IncomeCategory("Tiền lãi");
@@ -197,8 +196,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.close();
     }
 
-    public void updateIncomeCategory(DTO_IncomeCategory theLoaiThu, String incomeCategoryID)
-    {
+    public void updateIncomeCategory(DTO_IncomeCategory theLoaiThu, String incomeCategoryID) {
         Log.i(TAG, "DatabaseHelper.updateIncomeCategory ... " + theLoaiThu.getIncomeCategoryName());
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -216,8 +214,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.close();
     }
 
-    public void deleteIncomeCategory(String incomeCategoryID)
-    {
+    public void deleteIncomeCategory(String incomeCategoryID) {
         Log.i(TAG, "DatabaseHelper.deleteIncomeCategory ...");
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -228,7 +225,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     }
 
     public int getIncomeCategoryCount() {
-        Log.i(TAG, "DatabaseHelper.getIncomeCategoryCount ... " );
+        Log.i(TAG, "DatabaseHelper.getIncomeCategoryCount ... ");
 
         String countQuery = "SELECT  * FROM " + TABLE_INCOMECATEGORY;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -241,13 +238,11 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return count;
     }
 
-    public int getIncomeCategoryIndex(String s)
-    {
+    public int getIncomeCategoryIndex(String s) {
         return DatabaseHelper.getInstance(ctx).getIncomeCategory().indexOf(s);
     }
 
-    public List<String> getIncomeCategory()
-    {
+    public List<String> getIncomeCategory() {
         List<String> lstIncomeCategory = new ArrayList<String>();
 
         Log.i(TAG, "DatabaseHelper.getIncomeCategory ... ");
@@ -255,10 +250,8 @@ public class DatabaseHelper extends SQLiteOpenHelper
         String query = "SELECT " + COLUMN_INCOMECATEGORY_INCOMECATEGORYNAME + " FROM " + TABLE_INCOMECATEGORY;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
-            do
-            {
+        if (cursor.moveToFirst()) {
+            do {
                 lstIncomeCategory.add(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INCOMECATEGORY_INCOMECATEGORYNAME)));
             } while (cursor.moveToNext());
         }
@@ -267,8 +260,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstIncomeCategory;
     }
 
-    public List<String> getIncomeCategoryID()
-    {
+    public List<String> getIncomeCategoryID() {
         List<String> lstIncomeCategoryID = new ArrayList<String>();
 
         Log.i(TAG, "DatabaseHelper.getIncomeCategoryID ... ");
@@ -276,10 +268,8 @@ public class DatabaseHelper extends SQLiteOpenHelper
         String query = "SELECT " + COLUMN_INCOMECATEGORY_INCOMECATEGORYID + " FROM " + TABLE_INCOMECATEGORY;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
-            do
-            {
+        if (cursor.moveToFirst()) {
+            do {
                 lstIncomeCategoryID.add(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INCOMECATEGORY_INCOMECATEGORYID)));
             } while (cursor.moveToNext());
         }
@@ -306,8 +296,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.close();
     }
 
-    public void updateIncome(DTO_Income income, String incomeID)
-    {
+    public void updateIncome(DTO_Income income, String incomeID) {
         Log.i(TAG, "DatabaseHelper.updateIncome ... " + income.getIncomeID());
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -328,8 +317,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.close();
     }
 
-    public void deleteIncome(String incomeID)
-    {
+    public void deleteIncome(String incomeID) {
         Log.i(TAG, "DatabaseHelper.deleteIncome ...");
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -339,15 +327,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 null);
     }
 
-    public List<String> getIncomeID()
-    {
+    public List<String> getIncomeID() {
         List<String> lstIncomeID = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getIncomeID ... ");
         String query = "SELECT " + COLUMN_INCOME_INCOMEID + " FROM " + TABLE_INCOME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstIncomeID.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -357,15 +343,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstIncomeID;
     }
 
-    public List<String> getIncomeName()
-    {
+    public List<String> getIncomeName() {
         List<String> lstIncomeName = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getIncomeName ... ");
         String query = "SELECT " + COLUMN_INCOME_INCOMENAME + " FROM " + TABLE_INCOME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstIncomeName.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -375,15 +359,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstIncomeName;
     }
 
-    public List<String> getIncomeAmount()
-    {
+    public List<String> getIncomeAmount() {
         List<String> lstIncomeAmount = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getIncomeAmount ... ");
         String query = "SELECT " + COLUMN_INCOME_INCOMEAMOUNT + " FROM " + TABLE_INCOME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstIncomeAmount.add(String.format("%.1f", cursor.getDouble(0)));
             } while (cursor.moveToNext());
@@ -393,15 +375,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstIncomeAmount;
     }
 
-    public List<String> getIncomeDate()
-    {
+    public List<String> getIncomeDate() {
         List<String> lstIncomeDate = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getIncomeDate ... ");
         String query = "SELECT " + COLUMN_INCOME_INCOMEDATE + " FROM " + TABLE_INCOME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstIncomeDate.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -411,15 +391,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstIncomeDate;
     }
 
-    public List<String> getIncomeNote()
-    {
+    public List<String> getIncomeNote() {
         List<String> lstIncomeNote = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getIncomeNote ... ");
         String query = "SELECT " + COLUMN_INCOME_INCOMENOTE + " FROM " + TABLE_INCOME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstIncomeNote.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -431,9 +409,9 @@ public class DatabaseHelper extends SQLiteOpenHelper
     //endregion
 
     //region ExpenseCategory
-    public void createDefaultExpenseCategory()  {
+    public void createDefaultExpenseCategory() {
         int count = this.getExpenseCategoryCount();
-        if(count == 0 ) {
+        if (count == 0) {
             DTO_ExpenseCategory expenseCategory1 = new DTO_ExpenseCategory("Ăn uống");
             DTO_ExpenseCategory expenseCategory2 = new DTO_ExpenseCategory("Hoá đơn & Tiện ích");
             DTO_ExpenseCategory expenseCategory3 = new DTO_ExpenseCategory("Di chuyển");
@@ -482,8 +460,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.close();
     }
 
-    public void updateExpenseCategory(DTO_ExpenseCategory expenseCategory, String expenseCategoryID)
-    {
+    public void updateExpenseCategory(DTO_ExpenseCategory expenseCategory, String expenseCategoryID) {
         Log.i(TAG, "DatabaseHelper.updateExpenseCategory ... " + expenseCategory.getExpenseCategoryName());
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -501,8 +478,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.close();
     }
 
-    public void deleteExpenseCategory(String expenseCategoryID)
-    {
+    public void deleteExpenseCategory(String expenseCategoryID) {
         Log.i(TAG, "DatabaseHelper.deleteExpenseCategory ...");
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -513,7 +489,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     }
 
     public int getExpenseCategoryCount() {
-        Log.i(TAG, "DatabaseHelper.getExpenseCategoryCount ... " );
+        Log.i(TAG, "DatabaseHelper.getExpenseCategoryCount ... ");
 
         String countQuery = "SELECT  * FROM " + TABLE_EXPENSECATEGORY;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -526,13 +502,11 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return count;
     }
 
-    public int getExpenseCategoryIndex(String s)
-    {
+    public int getExpenseCategoryIndex(String s) {
         return DatabaseHelper.getInstance(ctx).getExpenseCategory().indexOf(s);
     }
 
-    public List<String> getExpenseCategory()
-    {
+    public List<String> getExpenseCategory() {
         List<String> lstExpenseCategory = new ArrayList<String>();
 
         Log.i(TAG, "DatabaseHelper.getExpenseCategory ... ");
@@ -540,10 +514,8 @@ public class DatabaseHelper extends SQLiteOpenHelper
         String query = "SELECT " + COLUMN_EXPENSECATEGORY_EXPENSECATEGORYNAME + " FROM " + TABLE_EXPENSECATEGORY;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
-            do
-            {
+        if (cursor.moveToFirst()) {
+            do {
                 lstExpenseCategory.add(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EXPENSECATEGORY_EXPENSECATEGORYNAME)));
             } while (cursor.moveToNext());
         }
@@ -552,8 +524,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstExpenseCategory;
     }
 
-    public List<String> getExpenseCategoryID()
-    {
+    public List<String> getExpenseCategoryID() {
         List<String> lstExpenseCategoryID = new ArrayList<String>();
 
         Log.i(TAG, "DatabaseHelper.getExpenseCategoryID ... ");
@@ -561,10 +532,8 @@ public class DatabaseHelper extends SQLiteOpenHelper
         String query = "SELECT " + COLUMN_EXPENSECATEGORY_EXPENSECATEGORYID + " FROM " + TABLE_EXPENSECATEGORY;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
-            do
-            {
+        if (cursor.moveToFirst()) {
+            do {
                 lstExpenseCategoryID.add(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EXPENSECATEGORY_EXPENSECATEGORYID)));
             } while (cursor.moveToNext());
         }
@@ -591,8 +560,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.close();
     }
 
-    public void updateExpense(DTO_Expense expense, String expenseID)
-    {
+    public void updateExpense(DTO_Expense expense, String expenseID) {
         Log.i(TAG, "DatabaseHelper.updateExpense ... " + expense.getExpenseID());
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -613,8 +581,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.close();
     }
 
-    public void deleteExpense(String expenseID)
-    {
+    public void deleteExpense(String expenseID) {
         Log.i(TAG, "DatabaseHelper.deleteExpense ...");
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -624,15 +591,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 null);
     }
 
-    public List<String> getExpenseID()
-    {
+    public List<String> getExpenseID() {
         List<String> lstExpenseID = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getExpenseID ... ");
         String query = "SELECT " + COLUMN_EXPENSE_EXPENSEID + " FROM " + TABLE_EXPENSE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstExpenseID.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -642,15 +607,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstExpenseID;
     }
 
-    public List<String> getExpenseName()
-    {
+    public List<String> getExpenseName() {
         List<String> lstExpenseName = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getExpenseName ... ");
         String query = "SELECT " + COLUMN_EXPENSE_EXPENSENAME + " FROM " + TABLE_EXPENSE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstExpenseName.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -660,15 +623,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstExpenseName;
     }
 
-    public List<String> getExpenseAmount()
-    {
+    public List<String> getExpenseAmount() {
         List<String> lstExpenseAmount = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getExpenseAmount ... ");
         String query = "SELECT " + COLUMN_EXPENSE_EXPENSEAMOUNT + " FROM " + TABLE_EXPENSE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstExpenseAmount.add(String.format("%.1f", cursor.getDouble(0)));
             } while (cursor.moveToNext());
@@ -678,15 +639,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstExpenseAmount;
     }
 
-    public List<String> getExpenseDate()
-    {
+    public List<String> getExpenseDate() {
         List<String> lstExpenseDate = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getExpenseDate ... ");
         String query = "SELECT " + COLUMN_EXPENSE_EXPENSEDATE + " FROM " + TABLE_EXPENSE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstExpenseDate.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -696,15 +655,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstExpenseDate;
     }
 
-    public List<String> getExpenseNote()
-    {
+    public List<String> getExpenseNote() {
         List<String> lstExpenseNote = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getExpenseNote ... ");
         String query = "SELECT " + COLUMN_EXPENSE_EXPENSENOTE + " FROM " + TABLE_EXPENSE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstExpenseNote.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -734,8 +691,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.close();
     }
 
-    public void updateDebt(DTO_Debt debt, String debtID)
-    {
+    public void updateDebt(DTO_Debt debt, String debtID) {
         Log.i(TAG, "DatabaseHelper.updateDebt ... " + debt.getDebtID());
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -758,8 +714,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.close();
     }
 
-    public void deleteDebt(String debtID)
-    {
+    public void deleteDebt(String debtID) {
         Log.i(TAG, "DatabaseHelper.deleteDebt ...");
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -769,15 +724,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 null);
     }
 
-    public List<String> getDebtID()
-    {
+    public List<String> getDebtID() {
         List<String> lstDebtID = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getDebtID ... ");
         String query = "SELECT " + COLUMN_DEBT_DEBTID + " FROM " + TABLE_DEBT;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstDebtID.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -787,15 +740,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstDebtID;
     }
 
-    public List<String> getDebtName()
-    {
+    public List<String> getDebtName() {
         List<String> lstDebtName = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getDebtName ... ");
         String query = "SELECT " + COLUMN_DEBT_DEBTNAME + " FROM " + TABLE_DEBT;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstDebtName.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -805,15 +756,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstDebtName;
     }
 
-    public List<String> getDebtAmount()
-    {
+    public List<String> getDebtAmount() {
         List<String> lstDebtAmount = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getDebtAmount ... ");
         String query = "SELECT " + COLUMN_DEBT_DEBTAMOUNT + " FROM " + TABLE_DEBT;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstDebtAmount.add(String.format("%.1f", cursor.getDouble(0)));
             } while (cursor.moveToNext());
@@ -823,15 +772,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstDebtAmount;
     }
 
-    public List<String> getDebtInterestRate()
-    {
+    public List<String> getDebtInterestRate() {
         List<String> lstDebtInterestRate = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getDebtInterestRate ... ");
         String query = "SELECT " + COLUMN_DEBT_DEBTINTERESTRATE + " FROM " + TABLE_DEBT;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstDebtInterestRate.add(String.format("%.2f", cursor.getDouble(0)));
             } while (cursor.moveToNext());
@@ -841,15 +788,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstDebtInterestRate;
     }
 
-    public List<String> getDebtDate()
-    {
+    public List<String> getDebtDate() {
         List<String> lstDebtDate = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getDebtDate ... ");
         String query = "SELECT " + COLUMN_DEBT_DEBTDATE + " FROM " + TABLE_DEBT;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstDebtDate.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -859,15 +804,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstDebtDate;
     }
 
-    public List<String> getDebtExpirationDate()
-    {
+    public List<String> getDebtExpirationDate() {
         List<String> lstDebtExpirationDate = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getDebtExpirationDate ... ");
         String query = "SELECT " + COLUMN_DEBT_DEBTEXPIRATIONDATE + " FROM " + TABLE_DEBT;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstDebtExpirationDate.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -877,15 +820,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstDebtExpirationDate;
     }
 
-    public List<String> getDebtNote()
-    {
+    public List<String> getDebtNote() {
         List<String> lstDebtNote = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getDebtNote ... ");
         String query = "SELECT " + COLUMN_DEBT_DEBTNOTE + " FROM " + TABLE_DEBT;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstDebtNote.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -895,7 +836,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstDebtNote;
     }
     //endregion
-    
+
     //region Loan
     public void addLoan(DTO_Loan loan) {
         Log.i(TAG, "DatabaseHelper.addLoan ... " + loan.getLoanID());
@@ -915,8 +856,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.close();
     }
 
-    public void updateLoan(DTO_Loan loan, String loanID)
-    {
+    public void updateLoan(DTO_Loan loan, String loanID) {
         Log.i(TAG, "DatabaseHelper.updateLoan ... " + loan.getLoanID());
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -939,8 +879,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.close();
     }
 
-    public void deleteLoan(String loanID)
-    {
+    public void deleteLoan(String loanID) {
         Log.i(TAG, "DatabaseHelper.deleteLoan ...");
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -950,15 +889,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 null);
     }
 
-    public List<String> getLoanID()
-    {
+    public List<String> getLoanID() {
         List<String> lstLoanID = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getLoanID ... ");
         String query = "SELECT " + COLUMN_LOAN_LOANID + " FROM " + TABLE_LOAN;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstLoanID.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -968,15 +905,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstLoanID;
     }
 
-    public List<String> getLoanName()
-    {
+    public List<String> getLoanName() {
         List<String> lstLoanName = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getLoanName ... ");
         String query = "SELECT " + COLUMN_LOAN_LOANNAME + " FROM " + TABLE_LOAN;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstLoanName.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -986,15 +921,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstLoanName;
     }
 
-    public List<String> getLoanAmount()
-    {
+    public List<String> getLoanAmount() {
         List<String> lstLoanAmount = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getLoanAmount ... ");
         String query = "SELECT " + COLUMN_LOAN_LOANAMOUNT + " FROM " + TABLE_LOAN;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstLoanAmount.add(String.format("%.1f", cursor.getDouble(0)));
             } while (cursor.moveToNext());
@@ -1004,15 +937,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstLoanAmount;
     }
 
-    public List<String> getLoanInterestRate()
-    {
+    public List<String> getLoanInterestRate() {
         List<String> lstLoanInterestRate = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getLoanInterestRate ... ");
         String query = "SELECT " + COLUMN_LOAN_LOANINTERESTRATE + " FROM " + TABLE_LOAN;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstLoanInterestRate.add(String.format("%.2f", cursor.getDouble(0)));
             } while (cursor.moveToNext());
@@ -1022,15 +953,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstLoanInterestRate;
     }
 
-    public List<String> getLoanDate()
-    {
+    public List<String> getLoanDate() {
         List<String> lstLoanDate = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getLoanDate ... ");
         String query = "SELECT " + COLUMN_LOAN_LOANDATE + " FROM " + TABLE_LOAN;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstLoanDate.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -1040,15 +969,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstLoanDate;
     }
 
-    public List<String> getLoanExpirationDate()
-    {
+    public List<String> getLoanExpirationDate() {
         List<String> lstLoanExpirationDate = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getLoanExpirationDate ... ");
         String query = "SELECT " + COLUMN_LOAN_LOANEXPIRATIONDATE + " FROM " + TABLE_LOAN;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstLoanExpirationDate.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -1058,15 +985,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstLoanExpirationDate;
     }
 
-    public List<String> getLoanNote()
-    {
+    public List<String> getLoanNote() {
         List<String> lstLoanNote = new ArrayList<String>();
         Log.i(TAG, "DatabaseHelper.getLoanNote ... ");
         String query = "SELECT " + COLUMN_LOAN_LOANNOTE + " FROM " + TABLE_LOAN;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 lstLoanNote.add(cursor.getString(0));
             } while (cursor.moveToNext());
@@ -1076,4 +1001,22 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return lstLoanNote;
     }
     //endregion
+
+    public List<Pair<String, Integer>> getOverallIncomeInformation(String tableName, String groupBy, String columns) {
+        List<Pair<String, Integer>> result = new ArrayList<Pair<String, Integer>>();
+        Log.i(TAG, "DatabaseHelper.getOverall"+tableName+"Information ... ");
+
+        String countQuery = "SELECT " + columns + " FROM " + tableName + " GROUP BY " + groupBy;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                result.add(new Pair<String, Integer>(cursor.getString(0), cursor.getInt(1)));
+            } while (cursor.moveToNext());
+        }
+        if (cursor != null && !cursor.isClosed())
+            cursor.close();
+        return result;
+    }
 }
