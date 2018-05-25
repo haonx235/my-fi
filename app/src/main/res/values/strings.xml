@@ -8,6 +8,7 @@
         <item>Khoản cho vay</item>
         <item>Quản lý loại thu/chi</item>
         <item>Thống kê</item>
+        <item>Xuất bảng biểu</item>
     </string-array>
 
     <string-array name="description">
@@ -17,6 +18,7 @@
         <item>Quản lý các khoản cho vay</item>
         <item>Chỉnh sửa thể loại thu/chi</item>
         <item>Thống kê thu chi theo tháng, quý, năm</item>
+        <item>Xuất tệp định dạng CSV để lưu trữ</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

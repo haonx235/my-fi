@@ -37,7 +37,8 @@
         <activity android:name=".ManageIncomeExpenseCategory.ManageIncomeExpenseCategoryActivity" />
         <activity android:name=".Chart.BarChartActivity" />
         <activity android:name=".Chart.PieChartActivity" />
-        <activity android:name=".Chart.PNBarChartActivity"></activity>
+        <activity android:name=".Chart.PNBarChartActivity" />
+        <activity android:name=".CSVExporter.CSVExporterActivity"></activity>
     </application>
 
 </manifest>
