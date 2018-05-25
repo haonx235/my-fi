@@ -19,6 +19,19 @@
         android:layout_marginBottom="35dp"
         android:layout_marginRight="5dp"
         android:paddingBottom="12dp"
-        android:text="Den Pie" />
+        android:text="Den Pie"
+        />
+
+    <Spinner
+        android:id="@+id/spchoice_pnbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawSelectorOnTop="true"
+        android:entries="@array/choice_pnbar"
+        android:layout_margin="8dp"
+        android:layout_marginBottom="35dp"
+        android:layout_marginRight="5dp"
+        android:paddingBottom="12dp"
+        ></Spinner>
 
 </RelativeLayout>

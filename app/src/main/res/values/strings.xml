@@ -21,6 +21,18 @@
         <item>Xuất tệp định dạng CSV để lưu trữ</item>
     </string-array>
 
+    <string-array name="choice_pie">
+        <item>Thu</item>
+        <item>Chi</item>
+        <item>Cho vay</item>
+        <item>Vay</item>
+    </string-array>
+
+    <string-array name="choice_pnbar">
+        <item>Thu và chi</item>
+        <item>Vay và cho vay</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="xem_khoan_chi">Xem khoản chi</string>
 
