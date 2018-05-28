@@ -60,13 +60,13 @@ public class PNBarChartActivity extends AppCompatActivity {
 
         final List<Data> data = new ArrayList<>();
         List<Pair<String, Integer>> myData = new ArrayList<Pair<String, Integer>>();
-        /*incomeData = DatabaseHelper.getInstance(this).getOverallIncomeInformation(DatabaseHelper.TABLE_INCOME, "incomeName", "incomeName, SUM(incomeAmount)");
+        /*incomeData = DatabaseHelper.getInstance(this).getOverallDataInformation(DatabaseHelper.TABLE_INCOME, "incomeName", "incomeName, SUM(incomeAmount)");
         int index = 0;
         for (Pair<String, Integer> p : incomeData) {
             data.add(new Data(p.first, (float) index, (float) p.second));
             index++;
         }
-        incomeData = DatabaseHelper.getInstance(PNBarChartActivity.this).getOverallIncomeInformation(DatabaseHelper.TABLE_EXPENSE, "expenseName", "expenseName, SUM(expenseAmount)");
+        incomeData = DatabaseHelper.getInstance(PNBarChartActivity.this).getOverallDataInformation(DatabaseHelper.TABLE_EXPENSE, "expenseName", "expenseName, SUM(expenseAmount)");
         for (Pair<String, Integer> p : incomeData) {
             data.add(new Data(p.first, (float) index, (float) -p.second));
             index++;
@@ -92,9 +92,9 @@ public class PNBarChartActivity extends AppCompatActivity {
 
                         switch (spChoice.getSelectedItem().toString()) {
                             case "Thu và chi":
-                                myData = DatabaseHelper.getInstance(PNBarChartActivity.this).getOverallIncomeInformation(DatabaseHelper.TABLE_INCOME, "incomeName", "incomeName, SUM(incomeAmount)");
+                                myData = DatabaseHelper.getInstance(PNBarChartActivity.this).getOverallDataInformation(DatabaseHelper.TABLE_INCOME, "incomeName", "incomeName, SUM(incomeAmount)");
 
-                                myData.addAll(DatabaseHelper.getInstance(PNBarChartActivity.this).getOverallIncomeInformation(DatabaseHelper.TABLE_EXPENSE, "expenseName", "expenseName, (0-SUM(expenseAmount))"));
+                                myData.addAll(DatabaseHelper.getInstance(PNBarChartActivity.this).getOverallDataInformation(DatabaseHelper.TABLE_EXPENSE, "expenseName", "expenseName, SUM(expenseAmount)"));
                                 Collections.sort(myData, new Comparator<Pair<String, Integer>>() {
                                     @Override
                                     public int compare(final Pair<String, Integer> o1, final Pair<String, Integer> o2) {
@@ -117,9 +117,9 @@ public class PNBarChartActivity extends AppCompatActivity {
 
                                 break;
                             case "Vay và cho vay":
-                                myData = DatabaseHelper.getInstance(PNBarChartActivity.this).getOverallIncomeInformation(DatabaseHelper.TABLE_LOAN, "loanName", "loanName, SUM(loanAmount)");
+                                myData = DatabaseHelper.getInstance(PNBarChartActivity.this).getOverallDataInformation(DatabaseHelper.TABLE_LOAN, "loanName", "loanName, SUM(loanAmount)");
 
-                                myData.addAll(DatabaseHelper.getInstance(PNBarChartActivity.this).getOverallIncomeInformation(DatabaseHelper.TABLE_DEBT, "debtName", "debtName, (0-SUM(debtAmount))"));
+                                myData.addAll(DatabaseHelper.getInstance(PNBarChartActivity.this).getOverallDataInformation(DatabaseHelper.TABLE_DEBT, "debtName", "debtName, SUM(debtAmount)"));
                                 Collections.sort(myData, new Comparator<Pair<String, Integer>>() {
                                     @Override
                                     public int compare(final Pair<String, Integer> o1, final Pair<String, Integer> o2) {

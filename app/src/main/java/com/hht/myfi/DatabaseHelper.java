@@ -1002,9 +1002,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     //endregion
 
-    public List<Pair<String, Integer>> getOverallIncomeInformation(String tableName, String groupBy, String columns) {
+    public List<Pair<String, Integer>> getOverallDataInformation(String tableName, String groupBy, String columns) {
         List<Pair<String, Integer>> result = new ArrayList<Pair<String, Integer>>();
-        Log.i(TAG, "DatabaseHelper.getOverall"+tableName+"Information ... ");
+        Log.i(TAG, "DatabaseHelper.getOverall" + tableName + "Information ... ");
 
         String countQuery = "SELECT " + columns + " FROM " + tableName + " GROUP BY " + groupBy;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -1012,7 +1012,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                result.add(new Pair<String, Integer>(cursor.getString(0), cursor.getInt(1)));
+                int sign = (tableName.equals(DatabaseHelper.TABLE_EXPENSE) || tableName.equals(DatabaseHelper.TABLE_DEBT)) ? -1 : 1;
+
+                result.add(new Pair<String, Integer>(cursor.getString(0), sign * cursor.getInt(1)));
             } while (cursor.moveToNext());
         }
         if (cursor != null && !cursor.isClosed())

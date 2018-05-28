@@ -37,6 +37,7 @@ public class PieChartActivity extends AppCompatActivity {
     protected PieChart pieChart;
     protected Button btnTo;
     protected Spinner spChoice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +91,7 @@ public class PieChartActivity extends AppCompatActivity {
                         switch (spChoice.getSelectedItem().toString()) {
                             case "Thu":
                                 values = new ArrayList<>();
-                                myData = DatabaseHelper.getInstance(PieChartActivity.this).getOverallIncomeInformation(DatabaseHelper.TABLE_INCOME, "incomeName", "incomeName, SUM(incomeAmount)");
+                                myData = DatabaseHelper.getInstance(PieChartActivity.this).getOverallDataInformation(DatabaseHelper.TABLE_INCOME, "incomeName", "incomeName, SUM(incomeAmount)");
 
                                 index = 0;
                                 for (Pair<String, Integer> p : myData) {
@@ -98,7 +99,7 @@ public class PieChartActivity extends AppCompatActivity {
                                     index++;
                                 }
 
-                                dataSet = new PieDataSet(values,"Chú thích");
+                                dataSet = new PieDataSet(values, "Chú thích");
                                 dataSet.setSliceSpace(1f);
                                 dataSet.setSelectionShift(5f);
                                 dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
@@ -128,7 +129,7 @@ public class PieChartActivity extends AppCompatActivity {
                                 break;
                             case "Chi":
                                 values = new ArrayList<>();
-                                myData = DatabaseHelper.getInstance(PieChartActivity.this).getOverallIncomeInformation(DatabaseHelper.TABLE_EXPENSE, "expenseName", "expenseName, (0-SUM(expenseAmount))");
+                                myData = DatabaseHelper.getInstance(PieChartActivity.this).getOverallDataInformation(DatabaseHelper.TABLE_EXPENSE, "expenseName", "expenseName, (0-SUM(expenseAmount))");
 
                                 index = 0;
                                 for (Pair<String, Integer> p : myData) {
@@ -136,7 +137,7 @@ public class PieChartActivity extends AppCompatActivity {
                                     index++;
                                 }
 
-                                dataSet = new PieDataSet(values,"Chú thích");
+                                dataSet = new PieDataSet(values, "Chú thích");
                                 dataSet.setSliceSpace(1f);
                                 dataSet.setSelectionShift(5f);
                                 dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
@@ -166,7 +167,7 @@ public class PieChartActivity extends AppCompatActivity {
                                 break;
                             case "Cho vay":
                                 values = new ArrayList<>();
-                                myData = DatabaseHelper.getInstance(PieChartActivity.this).getOverallIncomeInformation(DatabaseHelper.TABLE_LOAN, "loanName", "loanName, SUM(loanAmount)");
+                                myData = DatabaseHelper.getInstance(PieChartActivity.this).getOverallDataInformation(DatabaseHelper.TABLE_LOAN, "loanName", "loanName, SUM(loanAmount)");
 
                                 index = 0;
                                 for (Pair<String, Integer> p : myData) {
@@ -174,7 +175,7 @@ public class PieChartActivity extends AppCompatActivity {
                                     index++;
                                 }
 
-                                dataSet = new PieDataSet(values,"Chú thích");
+                                dataSet = new PieDataSet(values, "Chú thích");
                                 dataSet.setSliceSpace(1f);
                                 dataSet.setSelectionShift(5f);
                                 dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
@@ -204,7 +205,7 @@ public class PieChartActivity extends AppCompatActivity {
                                 break;
                             case "Vay":
                                 values = new ArrayList<>();
-                                myData = DatabaseHelper.getInstance(PieChartActivity.this).getOverallIncomeInformation(DatabaseHelper.TABLE_DEBT, "debtName", "debtName, (0-SUM(debtAmount))");
+                                myData = DatabaseHelper.getInstance(PieChartActivity.this).getOverallDataInformation(DatabaseHelper.TABLE_DEBT, "debtName", "debtName, (0-SUM(debtAmount))");
 
                                 index = 0;
                                 for (Pair<String, Integer> p : myData) {
@@ -212,7 +213,7 @@ public class PieChartActivity extends AppCompatActivity {
                                     index++;
                                 }
 
-                                dataSet = new PieDataSet(values,"Chú thích");
+                                dataSet = new PieDataSet(values, "Chú thích");
                                 dataSet.setSliceSpace(1f);
                                 dataSet.setSelectionShift(5f);
                                 dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
@@ -257,12 +258,12 @@ public class PieChartActivity extends AppCompatActivity {
 
     private SpannableString generateCenterSpannableText(String chartName) {
 
-        SpannableString s = new SpannableString(chartName+"\ndeveloped by BDtren");
+        SpannableString s = new SpannableString(chartName + "\ndeveloped by BDtren");
         s.setSpan(new RelativeSizeSpan(1.7f), 0, chartName.length(), 0);
         s.setSpan(new StyleSpan(Typeface.NORMAL), chartName.length(), s.length() - 7, 0);
         s.setSpan(new ForegroundColorSpan(Color.GRAY), chartName.length(), s.length() - 7, 0);
         s.setSpan(new RelativeSizeSpan(.8f), chartName.length(), s.length() - 7, 0);
-        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 6 , s.length(), 0);
+        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 6, s.length(), 0);
         s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 6, s.length(), 0);
         return s;
     }
