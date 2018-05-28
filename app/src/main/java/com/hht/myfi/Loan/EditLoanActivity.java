@@ -142,7 +142,7 @@ public class EditLoanActivity extends AppCompatActivity {
                 {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date d = sdf.parse(suaNgayChoVay);
-                    sdf.applyPattern("yyyy/MM/dd");
+                    sdf.applyPattern("yyyy-MM-dd");
                     suaNgayChoVay = sdf.format(d);
                 } catch (ParseException e)
                 {
@@ -154,7 +154,7 @@ public class EditLoanActivity extends AppCompatActivity {
                 {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date d = sdf.parse(suaNgayThuLai);
-                    sdf.applyPattern("yyyy/MM/dd");
+                    sdf.applyPattern("yyyy-MM-dd");
                     suaNgayThuLai = sdf.format(d);
                 } catch (ParseException e)
                 {

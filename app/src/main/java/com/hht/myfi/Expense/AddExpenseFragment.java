@@ -97,7 +97,7 @@ public class AddExpenseFragment extends Fragment
                 {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date d = sdf.parse(ngayChi);
-                    sdf.applyPattern("yyyy/MM/dd");
+                    sdf.applyPattern("yyyy-MM-dd");
                     ngayChi = sdf.format(d);
                 } catch (ParseException e)
                 {

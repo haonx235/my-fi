@@ -121,7 +121,7 @@ public class EditExpenseActivity extends AppCompatActivity {
                 {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date d = sdf.parse(suaNgayChi);
-                    sdf.applyPattern("yyyy/MM/dd");
+                    sdf.applyPattern("yyyy-MM-dd");
                     suaNgayChi = sdf.format(d);
                 } catch (ParseException e)
                 {

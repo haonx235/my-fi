@@ -1,7 +1,11 @@
 package com.hht.myfi.CSVExporter;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,10 +20,15 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hht.myfi.DatabaseHelper;
 import com.hht.myfi.R;
+import com.opencsv.CSVWriter;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -34,7 +43,13 @@ public class CSVExporterActivity extends AppCompatActivity {
     EditText etxNam;
     Spinner spnTuyChonXuat;
     DatabaseHelper db = DatabaseHelper.getInstance(this);
-    List<String> checkBoxSelection = new ArrayList<>();
+    List<Integer> lstTuyChonXuat = new ArrayList<>();
+    final String lstThang[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Nov", "Dec"};
+    final String incomeColumnNames[] = {"Mã khoản thu", "Tên khoản thu", "Số tiền", "Ngày", "Ghi chú"};
+    final String expenseColumnNames[] = {"Mã khoản chi", "Tên khoản chi", "Số tiền", "Ngày", "Ghi chú"};
+    final String debtColumnNames[] = {"Mã khoản vay", "Tên khoản vay", "Số tiền", "Lãi suất", "Ngày vay", "Ngày trả", "Ghi chú"};
+    final String loanColumnNames[] = {"Mã khoản cho vay", "Tên khoản cho vay", "Số tiền", "Lãi suất", "Ngày cho vay", "Ngày thu lại", "Ghi chú"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,18 +83,20 @@ public class CSVExporterActivity extends AppCompatActivity {
                     etxThangQuy.setEnabled(true);
                     etxThangQuy.setInputType(InputType.TYPE_NULL);
                     etxThangQuy.setFocusable(true);
+
+                    if (spnTuyChonXuat.getSelectedItemPosition() == 0)
+                        tvwThangQuy.setText("Tháng");
+                    else
+                        tvwThangQuy.setText("Quý");
+
                     etxThangQuy.setOnTouchListener(new View.OnTouchListener() {
                         @Override
                         public boolean onTouch(View view, MotionEvent motionEvent) {
                             if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                                if (spnTuyChonXuat.getSelectedItemPosition() == 0) {
-                                    tvwThangQuy.setText("Tháng");
+                                if (spnTuyChonXuat.getSelectedItemPosition() == 0)
                                     createPickerDialog(1, 12, etxThangQuy, "Chọn tháng");
-                                }
-                                else {
-                                    tvwThangQuy.setText("Quý");
+                                else
                                     createPickerDialog(1, 4, etxThangQuy, "Chọn quý");
-                                }
                             }
                             return true;
                         }
@@ -158,41 +175,41 @@ public class CSVExporterActivity extends AppCompatActivity {
             case R.id.chbKhoanThu:
                 if(checked)
                 {
-                    checkBoxSelection.add("TABLE_INCOME");
+                    lstTuyChonXuat.add(0);
                 }
                 else
                 {
-                    checkBoxSelection.remove("TABLE_INCOME");
+                    lstTuyChonXuat.remove(0);
                 }
                 break;
             case R.id.chbKhoanChi:
                 if(checked)
                 {
-                    checkBoxSelection.add("TABLE_EXPENSE");
+                    lstTuyChonXuat.add(1);
                 }
                 else
                 {
-                    checkBoxSelection.remove("TABLE_EXPENSE");
+                    lstTuyChonXuat.remove(1);
                 }
                 break;
             case R.id.chbKhoanVay:
                 if(checked)
                 {
-                    checkBoxSelection.add("TABLE_LOAN");
+                    lstTuyChonXuat.add(2);
                 }
                 else
                 {
-                    checkBoxSelection.remove("TABLE_LOAN");
+                    lstTuyChonXuat.remove(2);
                 }
                 break;
             case R.id.chbKhoanChoVay:
                 if(checked)
                 {
-                    checkBoxSelection.add("TABLE_DEBT");
+                    lstTuyChonXuat.add(3);
                 }
                 else
                 {
-                    checkBoxSelection.remove("TABLE_DEBT");
+                    lstTuyChonXuat.remove(3);
                 }
                 break;
         }
@@ -200,9 +217,131 @@ public class CSVExporterActivity extends AppCompatActivity {
 
     public void onClickBtnXuat(View view)
     {
-        for(String tableName : checkBoxSelection)
-        {
+        verifyStoragePermissions(this);
+        String baseDir = android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
+        int periodType = spnTuyChonXuat.getSelectedItemPosition();
+        int thangQuy = Integer.parseInt(etxThangQuy.getText().toString());
+        int nam = Integer.parseInt(etxNam.getText().toString());
 
+        for (int i : lstTuyChonXuat)
+        {
+            exportCSV(view, i, periodType, thangQuy, nam);
+        }
+    }
+
+    // Storage Permissions
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
+    /**
+     * Checks if the app has permission to write to device storage
+     *
+     * If the app does not has permission then the user will be prompted to grant permissions
+     *
+     * @param activity
+     */
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
+    }
+
+    public void exportCSV(View view, int selection, int periodType, int thangQuy, int nam)
+    {
+        String baseDir = android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
+        String fileName;
+        String fileExtension = ".csv";
+        switch (selection)
+        {
+            case 0:
+                fileName = "Income";
+                break;
+            case 1:
+                fileName = "Expense";
+                break;
+            case 2:
+                fileName = "Debt";
+                break;
+            case 3:
+                fileName = "Loan";
+                break;
+            default:
+                fileName = "MyFi";
+                break;
+        }
+
+        switch (periodType)
+        {
+            case 0:
+                fileName = fileName + "_" + lstThang[thangQuy] + "_" + nam;
+                break;
+            case 1:
+                fileName = fileName + "_Q" + thangQuy + "_" + nam;
+                break;
+            case 2:
+                fileName = fileName + "_" + nam;
+                break;
+        }
+
+        String filePath = baseDir + File.separator + fileName;
+        File f = new File(filePath + fileExtension);
+        CSVWriter writer;
+        try
+        {
+            // File exist
+            int index = 0;
+            while (f.exists() && !f.isDirectory()){
+                index++;
+                f = new File(filePath + "_" + index + fileExtension);
+            }
+
+            if (index > 0)
+                filePath = filePath + "_" + index + fileExtension;
+            else
+                filePath = filePath + fileExtension;
+            writer = new CSVWriter(new FileWriter(filePath));
+
+            List<String[]> data = new ArrayList<>();
+            switch (selection)
+            {
+                case 0:
+                    data.add(incomeColumnNames);
+                    data.addAll(db.exportIncome(thangQuy, nam, periodType));
+                    break;
+                case 1:
+                    data.add(expenseColumnNames);
+                    data.addAll(db.exportExpense(thangQuy, nam, periodType));
+                    break;
+                case 2:
+                    data.add(debtColumnNames);
+                    data.addAll(db.exportDebt(thangQuy, nam, periodType));
+                    break;
+                case 3:
+                    data.add(loanColumnNames);
+                    data.addAll(db.exportLoan(thangQuy, nam, periodType));
+                    break;
+                default:
+                    break;
+            }
+            writer.writeAll(data);
+
+            writer.close();
+            Toast.makeText (view.getContext(), "File saved to " + filePath, Toast.LENGTH_LONG).show();
+        }
+        catch (IOException e)
+        {
+            Toast.makeText (view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
