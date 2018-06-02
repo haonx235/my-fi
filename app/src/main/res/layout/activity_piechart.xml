@@ -11,26 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
-    <Button
-        android:id="@+id/btnto_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_marginBottom="35dp"
-        android:layout_marginRight="5dp"
-        android:paddingBottom="12dp"
-        android:text="Den Bar" />
-    <Spinner
-        android:id="@+id/spchoice_pie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawSelectorOnTop="true"
-        android:entries="@array/choice_pie"
-        android:layout_margin="8dp"
-        android:layout_marginBottom="35dp"
-        android:layout_marginRight="5dp"
-        android:paddingBottom="12dp"
-        ></Spinner>
+
+    <!--<Button-->
+        <!--android:id="@+id/btnto_bar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:paddingBottom="12dp"-->
+        <!--android:text="Den Bar" />-->
+
+    <!--<Spinner-->
+        <!--android:id="@+id/spchoice_pie"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:entries="@array/choice_pie"-->
+        <!--android:paddingBottom="12dp"-->
+         <!--/>-->
 
 
 </RelativeLayout>

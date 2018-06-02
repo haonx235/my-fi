@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">MyFi</string>
 
+    <string name="title_income">Khoản thu</string>
+    <string name="title_expense">Khoản chi</string>
+    <string name="title_loan">Khoản vay</string>
+    <string name="title_debt">Khoản nợ</string>
+
     <string-array name="titles">
         <item>Khoản thu</item>
         <item>Khoản chi</item>

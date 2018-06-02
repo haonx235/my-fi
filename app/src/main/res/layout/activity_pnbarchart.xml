@@ -11,27 +11,26 @@
         android:layout_height="match_parent"
         android:id="@+id/pn_barchart"/>
     
-    <Button
-        android:id="@+id/btnto_pie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_marginBottom="35dp"
-        android:layout_marginRight="5dp"
-        android:paddingBottom="12dp"
-        android:text="Den Pie"
-        />
+    <!--<Button-->
+        <!--android:id="@+id/btnto_pie"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="8dp"-->
+        <!--android:layout_marginBottom="35dp"-->
+        <!--android:layout_marginRight="5dp"-->
+        <!--android:paddingBottom="12dp"-->
+        <!--android:text="Den Pie"-->
+        <!--/>-->
 
-    <Spinner
-        android:id="@+id/spchoice_pnbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawSelectorOnTop="true"
-        android:entries="@array/choice_pnbar"
-        android:layout_margin="8dp"
-        android:layout_marginBottom="35dp"
-        android:layout_marginRight="5dp"
-        android:paddingBottom="12dp"
-        ></Spinner>
+    <!--<Spinner-->
+        <!--android:id="@+id/spchoice_pnbar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignStart="@+id/btnto_pie"-->
+        <!--android:layout_alignTop="@+id/btnto_pie"-->
+        <!--android:drawSelectorOnTop="true"-->
+        <!--android:layout_marginTop="40dp"-->
+        <!--android:entries="@array/choice_pnbar"-->
+        <!--android:paddingBottom="12dp"></Spinner>-->
 
 </RelativeLayout>

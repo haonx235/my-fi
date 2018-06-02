@@ -1,271 +1,108 @@
 package com.hht.myfi.Chart;
 
+import android.app.ActionBar;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
-import android.util.Pair;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.Spinner;
 
-import com.github.mikephil.charting.animation.Easing;
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
-import com.hht.myfi.DatabaseHelper;
+import com.hht.myfi.MainActivity;
 import com.hht.myfi.R;
+import com.hht.myfi.ViewPagerAdapter;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+public class PieChartActivity extends AppCompatActivity implements ActionBar.TabListener {
 
-public class PieChartActivity extends AppCompatActivity {
 
-    protected PieChart pieChart;
-    protected Button btnTo;
-    protected Spinner spChoice;
+    ViewPager pager;
+    TabLayout tabLayout;
+
+    ViewPager mViewPager;
+    static Context mContext;
+//    PagerAdapter pagerAdapter;
+    ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_piechart);
+        //setContentView(R.layout.activity_piechart);
+        mContext = this;
 
-        btnTo = (Button) findViewById(R.id.btnto_bar);
-        btnTo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent barIntent = new Intent(PieChartActivity.this, PNBarChartActivity.class);
-                startActivity(barIntent);
-            }
-        });
+        setContentView(R.layout.chart_viewpager);
 
-        pieChart = (PieChart) findViewById(R.id.piechart);
 
-        pieChart.setUsePercentValues(true);
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setExtraOffsets(5, 10, 5, 5);
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        mViewPager = (ViewPager) findViewById(R.id.view_pager);
 
-        pieChart.setDragDecelerationFrictionCoef(0.95f);
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.addFragments(new IncomeFragment(), "Khoản thu");
+        viewPagerAdapter.addFragments(new ExpenseFragment(), "Khoản chi");
+        viewPagerAdapter.addFragments(new DebtFragment(), "Khoản vay");
+        viewPagerAdapter.addFragments(new LoanFragment(), "Khoản cho vay");
+        mViewPager.setAdapter(viewPagerAdapter);
+        tabLayout.setupWithViewPager(mViewPager);
 
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleColor(Color.WHITE);
-        pieChart.setHoleRadius(58f);
-        pieChart.setTransparentCircleRadius(61f);
 
-        Legend l = pieChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setDrawInside(false);
-        l.setXEntrySpace(7f);
-        l.setYEntrySpace(0f);
-        l.setYOffset(0f);
-
-        spChoice = (Spinner) findViewById(R.id.spchoice_pie);
-        spChoice.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        ArrayList<PieEntry> values = new ArrayList<>();
-                        List<Pair<String, Integer>> myData = new ArrayList<Pair<String, Integer>>();
-                        int index = 0;
-                        PieDataSet dataSet;
-                        PieData data;
-                        Description desc;
-
-                        switch (spChoice.getSelectedItem().toString()) {
-                            case "Thu":
-                                values = new ArrayList<>();
-                                myData = DatabaseHelper.getInstance(PieChartActivity.this).getOverallDataInformation(DatabaseHelper.TABLE_INCOME, "incomeName", "incomeName, SUM(incomeAmount)");
-
-                                index = 0;
-                                for (Pair<String, Integer> p : myData) {
-                                    values.add(new PieEntry(p.second, p.first));
-                                    index++;
-                                }
-
-                                dataSet = new PieDataSet(values, "Chú thích");
-                                dataSet.setSliceSpace(1f);
-                                dataSet.setSelectionShift(5f);
-                                dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
-
-                                data = new PieData(dataSet);
-                                data.setValueTextSize(10f);
-                                data.setValueTextColor(Color.BLACK);
-
-                                desc = new Description("Phần description này méo biết viết gì hết!!!");
-                                desc.setTextSize(15);
-
-                                pieChart.setCenterTextTypeface(Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf"));
-                                pieChart.setCenterText(generateCenterSpannableText("Biểu đồ thu"));
-
-                                pieChart.setTransparentCircleColor(Color.WHITE);
-                                pieChart.setTransparentCircleAlpha(110);
-
-                                pieChart.setDrawCenterText(true);
-                                pieChart.setRotationAngle(0);
-                                // enable rotation of the chart by touch
-                                pieChart.setRotationEnabled(true);
-                                pieChart.setHighlightPerTapEnabled(true);
-
-                                pieChart.setDescription(desc);
-                                pieChart.animateY(1000, Easing.EasingOption.EaseOutCubic);
-                                pieChart.setData(data);
-                                break;
-                            case "Chi":
-                                values = new ArrayList<>();
-                                myData = DatabaseHelper.getInstance(PieChartActivity.this).getOverallDataInformation(DatabaseHelper.TABLE_EXPENSE, "expenseName", "expenseName, (0-SUM(expenseAmount))");
-
-                                index = 0;
-                                for (Pair<String, Integer> p : myData) {
-                                    values.add(new PieEntry(p.second, p.first));
-                                    index++;
-                                }
-
-                                dataSet = new PieDataSet(values, "Chú thích");
-                                dataSet.setSliceSpace(1f);
-                                dataSet.setSelectionShift(5f);
-                                dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
-
-                                data = new PieData(dataSet);
-                                data.setValueTextSize(10f);
-                                data.setValueTextColor(Color.BLACK);
-
-                                desc = new Description("Phần description này méo biết viết gì hết!!!");
-                                desc.setTextSize(15);
-
-                                pieChart.setCenterTextTypeface(Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf"));
-                                pieChart.setCenterText(generateCenterSpannableText("Biểu đồ chi"));
-
-                                pieChart.setTransparentCircleColor(Color.WHITE);
-                                pieChart.setTransparentCircleAlpha(110);
-
-                                pieChart.setDrawCenterText(true);
-                                pieChart.setRotationAngle(0);
-                                // enable rotation of the chart by touch
-                                pieChart.setRotationEnabled(true);
-                                pieChart.setHighlightPerTapEnabled(true);
-
-                                pieChart.setDescription(desc);
-                                pieChart.animateY(1000, Easing.EasingOption.EaseOutCubic);
-                                pieChart.setData(data);
-                                break;
-                            case "Cho vay":
-                                values = new ArrayList<>();
-                                myData = DatabaseHelper.getInstance(PieChartActivity.this).getOverallDataInformation(DatabaseHelper.TABLE_LOAN, "loanName", "loanName, SUM(loanAmount)");
-
-                                index = 0;
-                                for (Pair<String, Integer> p : myData) {
-                                    values.add(new PieEntry(p.second, p.first));
-                                    index++;
-                                }
-
-                                dataSet = new PieDataSet(values, "Chú thích");
-                                dataSet.setSliceSpace(1f);
-                                dataSet.setSelectionShift(5f);
-                                dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
-
-                                data = new PieData(dataSet);
-                                data.setValueTextSize(10f);
-                                data.setValueTextColor(Color.BLACK);
-
-                                desc = new Description("Phần description này méo biết viết gì hết!!!");
-                                desc.setTextSize(15);
-
-                                pieChart.setCenterTextTypeface(Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf"));
-                                pieChart.setCenterText(generateCenterSpannableText("Biểu đồ cho vay"));
-
-                                pieChart.setTransparentCircleColor(Color.WHITE);
-                                pieChart.setTransparentCircleAlpha(110);
-
-                                pieChart.setDrawCenterText(true);
-                                pieChart.setRotationAngle(0);
-                                // enable rotation of the chart by touch
-                                pieChart.setRotationEnabled(true);
-                                pieChart.setHighlightPerTapEnabled(true);
-
-                                pieChart.setDescription(desc);
-                                pieChart.animateY(1000, Easing.EasingOption.EaseOutCubic);
-                                pieChart.setData(data);
-                                break;
-                            case "Vay":
-                                values = new ArrayList<>();
-                                myData = DatabaseHelper.getInstance(PieChartActivity.this).getOverallDataInformation(DatabaseHelper.TABLE_DEBT, "debtName", "debtName, (0-SUM(debtAmount))");
-
-                                index = 0;
-                                for (Pair<String, Integer> p : myData) {
-                                    values.add(new PieEntry(p.second, p.first));
-                                    index++;
-                                }
-
-                                dataSet = new PieDataSet(values, "Chú thích");
-                                dataSet.setSliceSpace(1f);
-                                dataSet.setSelectionShift(5f);
-                                dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
-
-                                data = new PieData(dataSet);
-                                data.setValueTextSize(10f);
-                                data.setValueTextColor(Color.BLACK);
-
-                                desc = new Description("Phần description này méo biết viết gì hết!!!");
-                                desc.setTextSize(15);
-
-                                pieChart.setCenterTextTypeface(Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf"));
-                                pieChart.setCenterText(generateCenterSpannableText("Biểu đồ vay"));
-
-                                pieChart.setTransparentCircleColor(Color.WHITE);
-                                pieChart.setTransparentCircleAlpha(110);
-
-                                pieChart.setDrawCenterText(true);
-                                pieChart.setRotationAngle(0);
-                                // enable rotation of the chart by touch
-                                pieChart.setRotationEnabled(true);
-                                pieChart.setHighlightPerTapEnabled(true);
-
-                                pieChart.setDescription(desc);
-                                pieChart.animateY(1000, Easing.EasingOption.EaseOutCubic);
-                                pieChart.setData(data);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                }
-        );
-
+        getSupportActionBar().show();
+        getSupportActionBar().setTitle("Thống kê");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
-    private SpannableString generateCenterSpannableText(String chartName) {
+    @Override
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+    }
 
-        SpannableString s = new SpannableString(chartName + "\ndeveloped by BDtren");
-        s.setSpan(new RelativeSizeSpan(1.7f), 0, chartName.length(), 0);
-        s.setSpan(new StyleSpan(Typeface.NORMAL), chartName.length(), s.length() - 7, 0);
-        s.setSpan(new ForegroundColorSpan(Color.GRAY), chartName.length(), s.length() - 7, 0);
-        s.setSpan(new RelativeSizeSpan(.8f), chartName.length(), s.length() - 7, 0);
-        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 6, s.length(), 0);
-        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 6, s.length(), 0);
-        return s;
+    @Override
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+    }
+
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.barchart, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            case R.id.bar_chart:
+                Intent bar_chart = new Intent(this, PNBarChartActivity.class);
+                bar_chart.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(bar_chart);
+                return true;
+            case R.id.pie_chart:
+                Intent pie_chart = new Intent(this, PieChartActivity.class);
+                pie_chart.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(pie_chart);
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
+
