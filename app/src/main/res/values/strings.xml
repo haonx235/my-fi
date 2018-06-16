@@ -13,6 +13,7 @@
         <item>Khoản cho vay</item>
         <item>Quản lý loại thu/chi</item>
         <item>Thống kê</item>
+        <item>Xuất bảng biểu</item>
     </string-array>
 
     <string-array name="description">
@@ -22,6 +23,19 @@
         <item>Quản lý các khoản cho vay</item>
         <item>Chỉnh sửa thể loại thu/chi</item>
         <item>Thống kê thu chi theo tháng, quý, năm</item>
+        <item>Xuất tệp định dạng CSV để lưu trữ</item>
+    </string-array>
+
+    <string-array name="choice_pie">
+        <item>Thu</item>
+        <item>Chi</item>
+        <item>Cho vay</item>
+        <item>Vay</item>
+    </string-array>
+
+    <string-array name="choice_pnbar">
+        <item>Thu và chi</item>
+        <item>Vay và cho vay</item>
     </string-array>
 
     <string-array name="choice_pie">

@@ -35,11 +35,16 @@
         <activity android:name=".Loan.LoanActivity" />
         <activity android:name=".Loan.EditLoanActivity" />
         <activity android:name=".ManageIncomeExpenseCategory.ManageIncomeExpenseCategoryActivity" />
-        <activity android:name=".Chart.BarChartActivity" />
+
         <activity android:name=".Chart.PieChartActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"   />
         <activity android:name=".Chart.PNBarChartActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+
+        <activity android:name=".Chart.PieChartActivity" />
+        <activity android:name=".Chart.PNBarChartActivity" />
+        <activity android:name=".CSVExporter.CSVExporterActivity"></activity>
+
     </application>
 
 </manifest>

@@ -114,7 +114,7 @@ public class AddLoanFragment extends Fragment
                 {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date d = sdf.parse(ngayChoVay);
-                    sdf.applyPattern("yyyy/MM/dd");
+                    sdf.applyPattern("yyyy-MM-dd");
                     ngayChoVay = sdf.format(d);
                 } catch (ParseException e)
                 {
@@ -126,7 +126,7 @@ public class AddLoanFragment extends Fragment
                 {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date d = sdf.parse(ngayThuLai);
-                    sdf.applyPattern("yyyy/MM/dd");
+                    sdf.applyPattern("yyyy-MM-dd");
                     ngayThuLai = sdf.format(d);
                 } catch (ParseException e)
                 {
