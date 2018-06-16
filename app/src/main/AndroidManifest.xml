@@ -41,8 +41,6 @@
         <activity android:name=".Chart.PNBarChartActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
 
-        <activity android:name=".Chart.PieChartActivity" />
-        <activity android:name=".Chart.PNBarChartActivity" />
         <activity android:name=".CSVExporter.CSVExporterActivity"></activity>
 
     </application>
