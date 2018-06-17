@@ -179,7 +179,8 @@ public class CSVExporterActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    lstTuyChonXuat.remove(0);
+                    if (lstTuyChonXuat.contains(0))
+                        lstTuyChonXuat.remove(lstTuyChonXuat.indexOf(0));
                 }
                 break;
             case R.id.chbKhoanChi:
@@ -189,7 +190,8 @@ public class CSVExporterActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    lstTuyChonXuat.remove(1);
+                    if (lstTuyChonXuat.contains(1))
+                        lstTuyChonXuat.remove(lstTuyChonXuat.indexOf(1));
                 }
                 break;
             case R.id.chbKhoanVay:
@@ -199,7 +201,8 @@ public class CSVExporterActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    lstTuyChonXuat.remove(2);
+                    if (lstTuyChonXuat.contains(2))
+                        lstTuyChonXuat.remove(lstTuyChonXuat.indexOf(2));
                 }
                 break;
             case R.id.chbKhoanChoVay:
@@ -209,7 +212,8 @@ public class CSVExporterActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    lstTuyChonXuat.remove(3);
+                    if (lstTuyChonXuat.contains(3))
+                        lstTuyChonXuat.remove(lstTuyChonXuat.indexOf(3));
                 }
                 break;
         }

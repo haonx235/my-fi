@@ -720,12 +720,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "";
         switch (selection)
         {
-            case 1:
+            case 0:
                 query = "SELECT * FROM " + TABLE_EXPENSE
                         + " WHERE strftime(\'%m\'," + COLUMN_EXPENSE_EXPENSEDATE + ")=\'" + String.format("%02d", month_quarter) + "\' AND "
                         + "strftime(\'%Y\', " + COLUMN_EXPENSE_EXPENSEDATE + ")=\'" + year + "\'";
                 break;
-            case 2:
+            case 1:
                 query = "SELECT * FROM " + TABLE_EXPENSE
                         + " WHERE (strftime(\'%m\'," + COLUMN_EXPENSE_EXPENSEDATE + ")=\'" + (month_quarter*3 - 2) + "\' AND "
                         + "strftime(\'%Y\', " + COLUMN_EXPENSE_EXPENSEDATE + ")=\'" + year + "\')"
@@ -734,7 +734,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         + "(strftime(\'%m\'," + COLUMN_EXPENSE_EXPENSEDATE + ")=\'" + (month_quarter*3) + "\' AND "
                         + "strftime(\'%Y\', " + COLUMN_EXPENSE_EXPENSEDATE + ")=\'" + year + "\')";
                 break;
-            case 3:
+            case 2:
                 query = "SELECT * FROM " + TABLE_EXPENSE
                         + " WHERE strftime(\'%Y\', " + COLUMN_EXPENSE_EXPENSEDATE + ")=\'" + year + "\'";
                 break;
@@ -929,12 +929,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "";
         switch (selection)
         {
-            case 1:
+            case 0:
                 query = "SELECT * FROM " + TABLE_DEBT
                         + " WHERE strftime(\'%m\'," + COLUMN_DEBT_DEBTINTERESTRATE + ")=\'" + String.format("%02d", month_quarter) + "\' AND "
                         + "strftime(\'%Y\', " + COLUMN_DEBT_DEBTINTERESTRATE + ")=\'" + year + "\'";
                 break;
-            case 2:
+            case 1:
                 query = "SELECT * FROM " + TABLE_DEBT
                         + " WHERE (strftime(\'%m\'," + COLUMN_DEBT_DEBTINTERESTRATE + ")=\'" + (month_quarter*3 - 2) + "\' AND "
                         + "strftime(\'%Y\', " + COLUMN_DEBT_DEBTINTERESTRATE + ")=\'" + year + "\')"
@@ -943,7 +943,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         + "(strftime(\'%m\'," + COLUMN_DEBT_DEBTINTERESTRATE + ")=\'" + (month_quarter*3) + "\' AND "
                         + "strftime(\'%Y\', " + COLUMN_DEBT_DEBTINTERESTRATE + ")=\'" + year + "\')";
                 break;
-            case 3:
+            case 2:
                 query = "SELECT * FROM " + TABLE_DEBT
                         + " WHERE strftime(\'%Y\', " + COLUMN_DEBT_DEBTINTERESTRATE + ")=\'" + year + "\'";
                 break;
@@ -1137,12 +1137,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "";
         switch (selection)
         {
-            case 1:
+            case 0:
                 query = "SELECT * FROM " + TABLE_LOAN
                         + " WHERE strftime(\'%m\'," + COLUMN_LOAN_LOANINTERESTRATE + ")=\'" + String.format("%02d", month_quarter) + "\' AND "
                         + "strftime(\'%Y\', " + COLUMN_LOAN_LOANINTERESTRATE + ")=\'" + year + "\'";
                 break;
-            case 2:
+            case 1:
                 query = "SELECT * FROM " + TABLE_LOAN
                         + " WHERE (strftime(\'%m\'," + COLUMN_LOAN_LOANINTERESTRATE + ")=\'" + (month_quarter*3 - 2) + "\' AND "
                         + "strftime(\'%Y\', " + COLUMN_LOAN_LOANINTERESTRATE + ")=\'" + year + "\')"
@@ -1151,7 +1151,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         + "(strftime(\'%m\'," + COLUMN_LOAN_LOANINTERESTRATE + ")=\'" + (month_quarter*3) + "\' AND "
                         + "strftime(\'%Y\', " + COLUMN_LOAN_LOANINTERESTRATE + ")=\'" + year + "\')";
                 break;
-            case 3:
+            case 2:
                 query = "SELECT * FROM " + TABLE_LOAN
                         + " WHERE strftime(\'%Y\', " + COLUMN_LOAN_LOANINTERESTRATE + ")=\'" + year + "\'";
                 break;
