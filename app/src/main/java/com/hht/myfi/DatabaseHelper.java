@@ -406,6 +406,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.close();
         return lstIncomeNote;
     }
+
+    public List<String[]> exportIncome(int month_quarter, int year, int selection) {
+        List<String[]> lstIncomeRecord = new ArrayList<String[]>();
+        Log.i(TAG, "DatabaseHelper.getIncomeRecord ... ");
+        String query = "";
+        switch (selection)
+        {
+            case 0:
+                query = "SELECT * FROM " + TABLE_INCOME
+                        + " WHERE strftime(\'%m\'," + COLUMN_INCOME_INCOMEDATE + ")=\'" + String.format("%02d", month_quarter) + "\' AND "
+                        + "strftime(\'%Y\', " + COLUMN_INCOME_INCOMEDATE + ")=\'" + year + "\'";
+                break;
+            case 1:
+                query = "SELECT * FROM " + TABLE_INCOME
+                        + " WHERE (strftime(\'%m\'," + COLUMN_INCOME_INCOMEDATE + ")=\'" + String.format("%02d", (month_quarter*3 - 2)) + "\' AND "
+                        + "strftime(\'%Y\', " + COLUMN_INCOME_INCOMEDATE + ")=\'" + year + "\')"
+                        + " OR (strftime(\'%m\'," + COLUMN_INCOME_INCOMEDATE + ")=\'" + String.format("%02d", (month_quarter*3 - 1)) + "\' AND "
+                        + "strftime(\'%Y\', " + COLUMN_INCOME_INCOMEDATE + ")=\'" + year + "\')"
+                        + " OR (strftime(\'%m\'," + COLUMN_INCOME_INCOMEDATE + ")=\'" + String.format("%02d", (month_quarter*3)) + "\' AND "
+                        + "strftime(\'%Y\', " + COLUMN_INCOME_INCOMEDATE + ")=\'" + year + "\')";
+                break;
+            case 2:
+                query = "SELECT * FROM " + TABLE_INCOME
+                        + " WHERE strftime(\'%Y\', " + COLUMN_INCOME_INCOMEDATE + ")=\'" + year + "\'";
+                break;
+             default:
+                break;
+        }
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            String[] temp = {
+                    cursor.getString(0),
+                    cursor.getString(1),
+                    String.format("%.1f", cursor.getDouble(2)),
+                    cursor.getString(3),
+                    cursor.getString(4)};
+            lstIncomeRecord.add(temp);
+        }
+        if (cursor != null && !cursor.isClosed())
+            cursor.close();
+        return lstIncomeRecord;
+    }
     //endregion
 
     //region ExpenseCategory
@@ -670,6 +713,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.close();
         return lstExpenseNote;
     }
+
+    public List<String[]> exportExpense(int month_quarter, int year, int selection) {
+        List<String[]> lstExpenseRecord = new ArrayList<String[]>();
+        Log.i(TAG, "DatabaseHelper.getExpenseRecord ... ");
+        String query = "";
+        switch (selection)
+        {
+            case 0:
+                query = "SELECT * FROM " + TABLE_EXPENSE
+                        + " WHERE strftime(\'%m\'," + COLUMN_EXPENSE_EXPENSEDATE + ")=\'" + String.format("%02d", month_quarter) + "\' AND "
+                        + "strftime(\'%Y\', " + COLUMN_EXPENSE_EXPENSEDATE + ")=\'" + year + "\'";
+                break;
+            case 1:
+                query = "SELECT * FROM " + TABLE_EXPENSE
+                        + " WHERE (strftime(\'%m\'," + COLUMN_EXPENSE_EXPENSEDATE + ")=\'" + (month_quarter*3 - 2) + "\' AND "
+                        + "strftime(\'%Y\', " + COLUMN_EXPENSE_EXPENSEDATE + ")=\'" + year + "\')"
+                        + "(strftime(\'%m\'," + COLUMN_EXPENSE_EXPENSEDATE + ")=\'" + (month_quarter*3 - 1) + "\' AND "
+                        + "strftime(\'%Y\', " + COLUMN_EXPENSE_EXPENSEDATE + ")=\'" + year + "\')"
+                        + "(strftime(\'%m\'," + COLUMN_EXPENSE_EXPENSEDATE + ")=\'" + (month_quarter*3) + "\' AND "
+                        + "strftime(\'%Y\', " + COLUMN_EXPENSE_EXPENSEDATE + ")=\'" + year + "\')";
+                break;
+            case 2:
+                query = "SELECT * FROM " + TABLE_EXPENSE
+                        + " WHERE strftime(\'%Y\', " + COLUMN_EXPENSE_EXPENSEDATE + ")=\'" + year + "\'";
+                break;
+            default:
+                break;
+        }
+        
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            String[] temp = {
+                    cursor.getString(0),
+                    cursor.getString(1),
+                    String.format("%.1f", cursor.getDouble(2)),
+                    cursor.getString(3),
+                    cursor.getString(4)};
+            lstExpenseRecord.add(temp);
+        }
+        if (cursor != null && !cursor.isClosed())
+            cursor.close();
+        return lstExpenseRecord;
+    }
     //endregion
 
     //region Debt
@@ -835,6 +922,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.close();
         return lstDebtNote;
     }
+
+    public List<String[]> exportDebt(int month_quarter, int year, int selection) {
+        List<String[]> lstDebtRecord = new ArrayList<String[]>();
+        Log.i(TAG, "DatabaseHelper.getDebtRecord ... ");
+        String query = "";
+        switch (selection)
+        {
+            case 0:
+                query = "SELECT * FROM " + TABLE_DEBT
+                        + " WHERE strftime(\'%m\'," + COLUMN_DEBT_DEBTINTERESTRATE + ")=\'" + String.format("%02d", month_quarter) + "\' AND "
+                        + "strftime(\'%Y\', " + COLUMN_DEBT_DEBTINTERESTRATE + ")=\'" + year + "\'";
+                break;
+            case 1:
+                query = "SELECT * FROM " + TABLE_DEBT
+                        + " WHERE (strftime(\'%m\'," + COLUMN_DEBT_DEBTINTERESTRATE + ")=\'" + (month_quarter*3 - 2) + "\' AND "
+                        + "strftime(\'%Y\', " + COLUMN_DEBT_DEBTINTERESTRATE + ")=\'" + year + "\')"
+                        + "(strftime(\'%m\'," + COLUMN_DEBT_DEBTINTERESTRATE + ")=\'" + (month_quarter*3 - 1) + "\' AND "
+                        + "strftime(\'%Y\', " + COLUMN_DEBT_DEBTINTERESTRATE + ")=\'" + year + "\')"
+                        + "(strftime(\'%m\'," + COLUMN_DEBT_DEBTINTERESTRATE + ")=\'" + (month_quarter*3) + "\' AND "
+                        + "strftime(\'%Y\', " + COLUMN_DEBT_DEBTINTERESTRATE + ")=\'" + year + "\')";
+                break;
+            case 2:
+                query = "SELECT * FROM " + TABLE_DEBT
+                        + " WHERE strftime(\'%Y\', " + COLUMN_DEBT_DEBTINTERESTRATE + ")=\'" + year + "\'";
+                break;
+            default:
+                break;
+        }
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            String[] temp = {
+                    cursor.getString(0),
+                    cursor.getString(1),
+                    String.format("%.1f", cursor.getDouble(2)),
+                    cursor.getString(3),
+                    cursor.getString(4)};
+            lstDebtRecord.add(temp);
+        }
+        if (cursor != null && !cursor.isClosed())
+            cursor.close();
+        return lstDebtRecord;
+    }
     //endregion
 
     //region Loan
@@ -999,6 +1129,69 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor != null && !cursor.isClosed())
             cursor.close();
         return lstLoanNote;
+    }
+
+    public List<String[]> exportLoan(int month_quarter, int year, int selection) {
+        List<String[]> lstLoanRecord = new ArrayList<String[]>();
+        Log.i(TAG, "DatabaseHelper.getLoanRecord ... ");
+        String query = "";
+        switch (selection)
+        {
+            case 0:
+                query = "SELECT * FROM " + TABLE_LOAN
+                        + " WHERE strftime(\'%m\'," + COLUMN_LOAN_LOANINTERESTRATE + ")=\'" + String.format("%02d", month_quarter) + "\' AND "
+                        + "strftime(\'%Y\', " + COLUMN_LOAN_LOANINTERESTRATE + ")=\'" + year + "\'";
+                break;
+            case 1:
+                query = "SELECT * FROM " + TABLE_LOAN
+                        + " WHERE (strftime(\'%m\'," + COLUMN_LOAN_LOANINTERESTRATE + ")=\'" + (month_quarter*3 - 2) + "\' AND "
+                        + "strftime(\'%Y\', " + COLUMN_LOAN_LOANINTERESTRATE + ")=\'" + year + "\')"
+                        + "(strftime(\'%m\'," + COLUMN_LOAN_LOANINTERESTRATE + ")=\'" + (month_quarter*3 - 1) + "\' AND "
+                        + "strftime(\'%Y\', " + COLUMN_LOAN_LOANINTERESTRATE + ")=\'" + year + "\')"
+                        + "(strftime(\'%m\'," + COLUMN_LOAN_LOANINTERESTRATE + ")=\'" + (month_quarter*3) + "\' AND "
+                        + "strftime(\'%Y\', " + COLUMN_LOAN_LOANINTERESTRATE + ")=\'" + year + "\')";
+                break;
+            case 2:
+                query = "SELECT * FROM " + TABLE_LOAN
+                        + " WHERE strftime(\'%Y\', " + COLUMN_LOAN_LOANINTERESTRATE + ")=\'" + year + "\'";
+                break;
+            default:
+                break;
+        }
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            String[] temp = {
+                    cursor.getString(0),
+                    cursor.getString(1),
+                    String.format("%.1f", cursor.getDouble(2)),
+                    cursor.getString(3),
+                    cursor.getString(4)};
+            lstLoanRecord.add(temp);
+        }
+        if (cursor != null && !cursor.isClosed())
+            cursor.close();
+        return lstLoanRecord;
+    }
+    //endregion
+
+    //region Others
+    public List<Pair<String, Integer>> getOverallIncomeInformation(String tableName, String groupBy, String columns) {
+        List<Pair<String, Integer>> result = new ArrayList<Pair<String, Integer>>();
+        Log.i(TAG, "DatabaseHelper.getOverall"+tableName+"Information ... ");
+
+        String countQuery = "SELECT " + columns + " FROM " + tableName + " GROUP BY " + groupBy;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                result.add(new Pair<String, Integer>(cursor.getString(0), cursor.getInt(1)));
+            } while (cursor.moveToNext());
+        }
+        if (cursor != null && !cursor.isClosed())
+            cursor.close();
+        return result;
     }
     //endregion
 

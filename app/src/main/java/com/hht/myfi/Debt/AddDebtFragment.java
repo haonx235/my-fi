@@ -114,7 +114,7 @@ public class AddDebtFragment extends Fragment
                 {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date d = sdf.parse(ngayVay);
-                    sdf.applyPattern("yyyy/MM/dd");
+                    sdf.applyPattern("yyyy-MM-dd");
                     ngayVay = sdf.format(d);
                 } catch (ParseException e)
                 {
@@ -126,7 +126,7 @@ public class AddDebtFragment extends Fragment
                 {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date d = sdf.parse(ngayTraVay);
-                    sdf.applyPattern("yyyy/MM/dd");
+                    sdf.applyPattern("yyyy-MM-dd");
                     ngayTraVay = sdf.format(d);
                 } catch (ParseException e)
                 {

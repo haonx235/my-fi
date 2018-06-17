@@ -121,7 +121,7 @@ public class EditIncomeActivity extends AppCompatActivity {
                 {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date d = sdf.parse(suaNgayThu);
-                    sdf.applyPattern("yyyy/MM/dd");
+                    sdf.applyPattern("yyyy-MM-dd");
                     suaNgayThu = sdf.format(d);
                 } catch (ParseException e)
                 {

@@ -16,7 +16,7 @@ public class Helper
 {
     public static List<String> formatDate(List<String> lst)
     {
-        String INPUT_FORMAT = "yyyy/MM/dd";
+        String INPUT_FORMAT = "yyyy-MM-dd";
         String OUTPUT_FORMAT = "dd/MM/yyyy";
 
         List<String> lst_out = new ArrayList<String>();
@@ -33,7 +33,7 @@ public class Helper
 
     public static String formatDate(String s)
     {
-        String INPUT_FORMAT = "yyyy/MM/dd";
+        String INPUT_FORMAT = "yyyy-MM-dd";
         String OUTPUT_FORMAT = "dd/MM/yyyy";
 
         SimpleDateFormat sdf = new SimpleDateFormat(INPUT_FORMAT);

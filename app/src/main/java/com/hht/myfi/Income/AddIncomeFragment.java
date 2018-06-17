@@ -97,7 +97,7 @@ public class AddIncomeFragment extends Fragment
                 {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date d = sdf.parse(ngayThu);
-                    sdf.applyPattern("yyyy/MM/dd");
+                    sdf.applyPattern("yyyy-MM-dd");
                     ngayThu = sdf.format(d);
                 } catch (ParseException e)
                 {
