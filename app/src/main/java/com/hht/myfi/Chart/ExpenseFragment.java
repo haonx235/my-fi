@@ -124,8 +124,7 @@ public class ExpenseFragment extends Fragment {
                         data.setValueTextSize(10f);
                         data.setValueTextColor(Color.BLACK);
 
-                        desc = new Description("Phần description này méo biết viết gì hết!!!");
-                        desc.setTextSize(15);
+
 
                         //pieChart.setCenterTextTypeface(Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf"));
                         pieChart.setCenterText(generateCenterSpannableText("Biểu đồ chi"));
@@ -139,7 +138,9 @@ public class ExpenseFragment extends Fragment {
                         pieChart.setRotationEnabled(true);
                         pieChart.setHighlightPerTapEnabled(true);
 
-                        pieChart.setDescription(desc);
+//        desc = new Description("Phần description này méo biết viết gì hết!!!");
+//        desc.setTextSize(15);
+//                        pieChart.setDescription(desc);
                         pieChart.animateY(1000, Easing.EasingOption.EaseOutCubic);
                         pieChart.setData(data);
 //                    }
@@ -154,13 +155,11 @@ public class ExpenseFragment extends Fragment {
 
     private SpannableString generateCenterSpannableText(String chartName) {
 
-        SpannableString s = new SpannableString(chartName + "\ndeveloped by BDtren");
-        s.setSpan(new RelativeSizeSpan(1.7f), 0, chartName.length(), 0);
-        s.setSpan(new StyleSpan(Typeface.NORMAL), chartName.length(), s.length() - 7, 0);
-        s.setSpan(new ForegroundColorSpan(Color.GRAY), chartName.length(), s.length() - 7, 0);
-        s.setSpan(new RelativeSizeSpan(.8f), chartName.length(), s.length() - 7, 0);
-        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 6, s.length(), 0);
-        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 6, s.length(), 0);
+        SpannableString s = new SpannableString(chartName + "\n");
+        s.setSpan(new RelativeSizeSpan(2.3f), 0, chartName.length(), 0);
+        s.setSpan(new StyleSpan(Typeface.NORMAL), 0, s.length(), 0);
+        s.setSpan(new ForegroundColorSpan(Color.BLACK), 0, s.length(), 0);
+        s.setSpan(new RelativeSizeSpan(.8f), 0, s.length(), 0);
         return s;
     }
 

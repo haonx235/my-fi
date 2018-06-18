@@ -302,6 +302,7 @@ public class PNBarChartActivity extends AppCompatActivity implements ActionBar.T
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.barchart, menu);
+        menu.getItem(0).setEnabled(false);
         return true;
     }
 
