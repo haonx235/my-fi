@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="single"
+        >
+        <item
+            android:id="@+id/itThu"
+            android:title="Khoản thu"
+            android:icon="@drawable/thu"
+            android:checked="true"
+
+            />
+
+        <item
+            android:id="@+id/itChi"
+            android:title="Khoản chi"
+            android:icon="@drawable/chi"
+            />
+
+        <item
+            android:id="@+id/itVay"
+            android:title="Khoản vay"
+            android:icon="@drawable/vay"
+            />
+
+        <item
+            android:id="@+id/itChoVay"
+            android:title="Khoản cho vay"
+            android:icon="@drawable/cho_vay"
+            />
+
+        <item
+            android:id="@+id/itLoaiThuChi"
+            android:title="Quản lý loại thu/chi"
+            android:icon="@drawable/ghi_chu"
+            />
+        <item
+            android:id="@+id/itBieuDo"
+            android:title="Biểu đồ"
+            android:icon="@drawable/pie_chart"
+            />
+        <item
+            android:id="@+id/itXuatCSV"
+            android:title="Xuất file CSV"
+            android:icon="@drawable/csv"
+            />
+    </group>
+
+
+</menu>
