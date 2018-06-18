@@ -1214,24 +1214,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.close();
         return result;
     }
-
-    public List<Pair<String, Integer>> getDataInformation_MainActivity(String tableName, String groupBy, String columns) {
-        List<Pair<String, Integer>> result = new ArrayList<Pair<String, Integer>>();
-        Log.i(TAG, "DatabaseHelper.getMainActivity" + tableName + "Information ... ");
-
-        String countQuery = "SELECT " + columns + " FROM " + tableName + " GROUP BY " + groupBy;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                int sign = (tableName.equals(DatabaseHelper.TABLE_EXPENSE) || tableName.equals(DatabaseHelper.TABLE_DEBT)) ? -1 : 1;
-
-                result.add(new Pair<String, Integer>(cursor.getString(0), sign * cursor.getInt(1)));
-            } while (cursor.moveToNext());
-        }
-        if (cursor != null && !cursor.isClosed())
-            cursor.close();
-        return result;
-    }
 }

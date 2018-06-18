@@ -48,15 +48,4 @@
     <string name="hintSoTien">Số tiền</string>
     <string name="menu_thu_chi_luu">Lưu</string>
 
-    <!--NTN-->
-    <string name="title_activity_main_menu">MainMenu</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_settings">Settings</string>
-
-    <string name="open">Mở</string>
-    <string name="close">Đóng</string>
-
 </resources>
