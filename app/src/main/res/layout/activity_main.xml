@@ -7,23 +7,79 @@
     android:layout_height="match_parent"
     tools:context="com.hht.myfi.MainActivity">
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/appBarLayout">
+
         <include
-            android:layout_height="wrap_content"
+            layout="@layout/toolbar"
             android:layout_width="match_parent"
-            layout="@layout/toolbar"></include>
+            android:layout_height="wrap_content">
+        </include>
+
     </android.support.design.widget.AppBarLayout>
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/listView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/appBarLayout"
         android:paddingStart="10dp"
         android:paddingTop="10dp" />
+
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="7dp"
+            android:id="@+id/cv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="10dp"
+            android:layout_gravity="center"
+            app:cardElevation="10dp"
+            app:cardBackgroundColor="#e2fa08"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                >
+
+                <TextView
+                    android:id="@+id/text_sum_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="Tổng tiền:"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sum_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/text_sum_money"
+                    android:text="0"
+                    android:textSize="25sp" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <ExpandableListView
+            android:id="@+id/lvExp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp">
+
+        </ExpandableListView>
+
+    </TableLayout>
 </RelativeLayout>
