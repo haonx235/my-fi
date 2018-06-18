@@ -4,12 +4,14 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hht.myfi.DatabaseHelper;
+import com.hht.myfi.MainActivity;
 import com.hht.myfi.R;
 import com.opencsv.CSVWriter;
 
@@ -129,7 +132,22 @@ public class CSVExporterActivity extends AppCompatActivity {
                 return true;
             }
         });
+        getSupportActionBar().show();
+        getSupportActionBar().setTitle("Xuất bảng biểu");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
 
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void createPickerDialog(int minValue, int maxValue, final EditText etx, String title)

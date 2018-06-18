@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.hht.myfi.MainActivity;
 import com.hht.myfi.R;
@@ -53,6 +54,8 @@ public class PieChartActivity extends AppCompatActivity implements ActionBar.Tab
         tabLayout.setupWithViewPager(mViewPager);
 
 
+
+
         getSupportActionBar().show();
         getSupportActionBar().setTitle("Thống kê");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -76,6 +79,7 @@ public class PieChartActivity extends AppCompatActivity implements ActionBar.Tab
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.barchart, menu);
+        menu.getItem(1).setEnabled(false);
         return true;
     }
 
